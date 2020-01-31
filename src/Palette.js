@@ -11,8 +11,12 @@ export default class Palette extends Component {
 
     render() {
         return (
-            <div>
-                
+            <div className='Palette'>
+                {/* {Navbar} */}
+                 <div className='Palette-colors'>
+                     {/* bunch of color boxes */}
+                 </div>
+                 {/* footer */}
             </div>
         )
     }
