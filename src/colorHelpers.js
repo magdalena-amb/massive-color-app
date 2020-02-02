@@ -14,7 +14,10 @@ function getRange(hexColor) {
 }
 
 function getScale (hexColor, numberOfColors) { 
-    return chroma.scale(getRange(hexColor)).mode('lab').colors(numberOfColors)
+    return chroma
+    .scale(getRange(hexColor))
+    .mode('lab')
+    .colors(numberOfColors)
 }
 
 
@@ -45,7 +48,5 @@ function generatePalette(starterPalette) {
     }
     return newPalette;
 }
-
-
 
 export { generatePalette }
