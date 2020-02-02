@@ -25,6 +25,7 @@
     color: #fff;
     text-transform: uppercase;
     border: none;
+    border-radius: 50px;
     opacity: 0;
 }
 
@@ -49,10 +50,11 @@
     background: rgba(255, 255, 255, .3);
     position: absolute;
     border: none;
+    border-radius: 20px 0 0 0;
     right: 0px;
     bottom: 0px;
     color: #fff;
-    width: 60px;
+    width: 80px;
     height: 30px;
     text-align: center;
     line-height: 30px;
