@@ -16,8 +16,20 @@ export default {
     nav: {
         display: 'flex',
         width: '100%',
+        height: '8vh',
         justifyContent: 'space-between',
-        color: '#fff'
+        alignItems: 'center',
+        color: '#fff',
+        '& a' : {
+            color: "#fff",
+            textDecoration: 'none',
+            display: 'inline-block',
+            padding: ' 0 1.5rem',
+            height: '30px',
+            lineHeight: '30px',
+            backgroundColor: 'rgba(255, 255, 255, .5)',
+            borderRadius: '50px'
+        }
     },
     palettes: {
         boxSizing: 'border-box',
