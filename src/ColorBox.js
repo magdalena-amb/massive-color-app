@@ -1,33 +1,29 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { withStyles } from '@material-ui/styles';
 import styles from './styles/ColorBoxStyles';
    
 
-class ColorBox extends Component {
+function ColorBox(props) {
 
-    state = {
-        copied: false
+    const [copied, setCopied] = useState(false);
+
+    const changeCopyState = () => {
+        setCopied(true); 
+        setTimeout(()=> setCopied(false), 1500);    
     }
 
-    changeCopyState = () => {
-         this.setState( {copied: true}, ()=> { 
-            setTimeout(()=> this.setState({copied: false }), 1500)
-         });
-    }
-
-    render() {
-        const {name, background, paletteId, id, showingFullPalette, classes} = this.props;
-        const { copied } = this.state;
-        
-        return (
-            <CopyToClipboard text={background} onCopy={this.changeCopyState}>
+    
+    const {name, background, paletteId, id, showingFullPalette, classes} = props;
+         
+    return (
+        <CopyToClipboard text={background} onCopy={changeCopyState}>
             <div style={{background}} className={classes.ColorBox}>
             <div style={{background}} className={`${classes.copyOverlay} ${copied && classes.showOverlay}`}></div>
             <div className={`${classes.copyMsg} ${copied && classes.showMsg}`}> 
                 <h1> Copied! </h1>
-                <p className={classes.copyText}> {this.props.background} </p>
+                <p className={classes.copyText}> {props.background} </p>
              </div>    
                 <div className='copy-container'>
                     <div className={classes.boxContent}>
@@ -46,6 +42,6 @@ class ColorBox extends Component {
             </CopyToClipboard>
         )
     }
-}
+
 
 export default withStyles(styles)(ColorBox);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState} from 'react'
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import Select from '@material-ui/core/Select'
@@ -12,25 +12,24 @@ import 'rc-slider/assets/index.css';
 import styles from './styles/NavbarStyles';
 
 
-class Navbar extends Component {
-    state = {
-       format : 'hex',
-       open: false 
+function Navbar (props) {
+
+    const [format, setFormat] = useState('hex');
+    const [open, setOpen] = useState(false);
+
+    const handleFormatChange = (e) => {
+        setFormat(e.target.value);
+        setOpen(true); 
+        props.handleChange(e.target.value);
     }
 
-    handleFormatChange = (e) => {
-        this.setState({format: e.target.value, open: true});
-        this.props.handleChange(e.target.value);
-
-    }
-
-    closeSnackbar = () => {
-        this.setState({open:false})
+    const closeSnackbar = () => {
+        setOpen(false)
     }
     
-    render() {
-        const { level, changeLevel, showingAllColors, classes } = this.props;
-        const { format } = this.state;
+   
+        const { level, changeLevel, showingAllColors, classes } = props;
+
         return (
             <nav className={classes.Navbar} >
                 <div className={classes.logo}>
@@ -51,7 +50,7 @@ class Navbar extends Component {
                 </div>
                 )}
                 <div className={classes.selectContainer}>
-                    <Select value={format} onChange={this.handleFormatChange}>
+                    <Select value={format} onChange={handleFormatChange}>
                         <MenuItem value='hex'>HEX - #ffffff</MenuItem>
                         <MenuItem value='rgb'>RGB - rgb(255,255,255)</MenuItem>
                         <MenuItem value='rgba'>RGBA - rgba(255,255,255, 1.0) </MenuItem>
@@ -59,16 +58,16 @@ class Navbar extends Component {
                 </div>
                 <Snackbar 
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    open={ this.state.open}
+                    open={open}
                     autoHideDuration={3000}
                     message={<span id='message-id'>Format changed to {format.toUpperCase()}!</span>}
                     ContentProps={{
                         "aria-describedby": "message-id"
                     }}
-                    onClose={this.closeSnackbar}
+                    onClose={closeSnackbar}
                     action={[
                         <IconButton 
-                            onClick={this.closeSnackbar}
+                            onClick={closeSnackbar}
                             color="inherit"
                             key="close"
                             aria-label="close"
@@ -80,6 +79,6 @@ class Navbar extends Component {
             </nav>
         )
     }
-}
+
 
 export default withStyles(styles)(Navbar);
